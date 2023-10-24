@@ -1,5 +1,4 @@
-from fastapi import APIRouter, Depends
-from starlette.requests import Request
+from fastapi import APIRouter
 
 router = APIRouter(
     prefix="/dashboard",

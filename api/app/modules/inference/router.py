@@ -1,8 +1,7 @@
-from fastapi import APIRouter, HTTPException
-
 from app.modules.inference.dto import GenerateSQLDTO
 from app.utils.llm import model
 from app.utils.sql_generation import get_generator
+from fastapi import APIRouter, HTTPException
 
 router = APIRouter(prefix="/inference", tags=["inference"])
 

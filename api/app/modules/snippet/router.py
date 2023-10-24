@@ -1,9 +1,8 @@
 from typing import Annotated
 
+from app.dependencies.auth import get_user
 from fastapi import APIRouter, Depends
 from prisma.models import User
-
-from app.dependencies.auth import get_user
 
 router = APIRouter(
     prefix="/snippet",

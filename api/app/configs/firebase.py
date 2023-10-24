@@ -1,5 +1,5 @@
-from firebase_admin import credentials
 from app.configs.settings import settings
+from firebase_admin import credentials
 
 certificate = credentials.Certificate(
     {

@@ -1,12 +1,11 @@
 from typing import Annotated
 
+from app.utils import prisma
 from fastapi import Depends
 from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
 from firebase_admin import auth
 from prisma.errors import RecordNotFoundError
 from prisma.models import User
-
-from app.utils import prisma
 
 security = HTTPBearer()
 

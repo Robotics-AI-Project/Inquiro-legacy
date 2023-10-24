@@ -1,13 +1,10 @@
-"""Template App
-"""
 from typing import Awaitable, Callable
 
-from fastapi import FastAPI
 import firebase_admin
-
 from app.configs import certificate
-from app.utils import prisma
 from app.scripts import generate_openapi_schema
+from app.utils import prisma
+from fastapi import FastAPI
 
 
 def register_startup_event(app: FastAPI) -> Callable[[], Awaitable[None]]:

@@ -1,13 +1,11 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
-from prisma.errors import PrismaError
-
+from app.dependencies.auth import get_user
 from app.modules.datasource.dto import CreateDatasourceDTO
 from app.utils import prisma
+from fastapi import APIRouter, Depends, HTTPException
+from prisma.errors import PrismaError
 from prisma.models import User
-
-from app.dependencies.auth import get_user
 
 router = APIRouter(
     prefix="/datasource",

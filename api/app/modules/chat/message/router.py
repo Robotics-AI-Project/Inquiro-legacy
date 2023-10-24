@@ -1,10 +1,8 @@
-from fastapi import APIRouter, Depends, HTTPException
-from prisma.models import Message
-
+from app.dependencies.auth import get_user
 from app.modules.chat.message.dto import CreateMessageDTO
 from app.utils import prisma
-
-from app.dependencies.auth import get_user
+from fastapi import APIRouter, Depends, HTTPException
+from prisma.models import Message
 
 router = APIRouter(
     prefix="/{chat_id}/message", tags=["message"], dependencies=[Depends(get_user)]

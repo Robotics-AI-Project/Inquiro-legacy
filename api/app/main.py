@@ -1,11 +1,10 @@
 import importlib.metadata
 
+from app.lifecycle import register_shutdown_event, register_startup_event
+from app.modules import api
 from fastapi import FastAPI
 from fastapi.security import HTTPBearer
 from starlette.middleware.cors import CORSMiddleware
-
-from app.lifecycle import register_startup_event, register_shutdown_event
-from app.modules import api
 
 app = FastAPI()
 

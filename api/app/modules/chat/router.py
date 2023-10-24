@@ -1,13 +1,11 @@
 from typing import Annotated
 
-from fastapi import APIRouter, Depends, HTTPException
-from prisma.models import User, Chat
-
-from app.modules.chat.dto import UpdateChatDTO, CreateChatDTO
-from app.utils import prisma
-
 from app.dependencies.auth import get_user
+from app.modules.chat.dto import CreateChatDTO, UpdateChatDTO
 from app.modules.chat.message import message_router
+from app.utils import prisma
+from fastapi import APIRouter, Depends, HTTPException
+from prisma.models import Chat, User
 
 router = APIRouter(prefix="/chat", tags=["chat"])
 router.include_router(message_router)

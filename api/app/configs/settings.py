@@ -1,6 +1,6 @@
 import os
 
-from pydantic import MySQLDsn, EmailStr
+from pydantic import EmailStr, MySQLDsn
 from pydantic_settings import BaseSettings
 
 
