@@ -1,11 +1,11 @@
-import { env } from "@/env/client.mjs";
 import axios from "axios";
 import { auth } from "./firebase-auth";
 import { ROUTES } from "@/constants/nav";
 import dayjs from "dayjs";
+import { clientEnv } from "./env/client.mjs";
 
 export const backendClient = axios.create({
-  baseURL: env.NEXT_PUBLIC_BACKEND_URL,
+  baseURL: clientEnv.NEXT_PUBLIC_BACKEND_URL,
   withCredentials: true,
 });
 

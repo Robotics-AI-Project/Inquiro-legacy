@@ -4,7 +4,7 @@
  * It has to be a `.mjs`-file to be imported there.
  */
 import { serverSchema } from "./schema.mjs";
-import { env as clientEnv, formatErrors } from "./client.mjs";
+import { formatErrors } from "./client.mjs";
 
 const _serverEnv = serverSchema.safeParse(process.env);
 
@@ -32,8 +32,4 @@ for (let key of Object.keys(_serverEnv.data)) {
   }
 }
 
-export const env = {
-  ..._serverEnv.data,
-  ...clientEnv,
-  PASSWORD_PROTECT: process.env.PASSWORD_PROTECT,
-};
+export const serverEnv = _serverEnv.data;
