@@ -3,3 +3,6 @@ web-dev:
 
 api-dev:
 	./scripts/api:dev.sh
+
+install:
+	./scripts/install.sh
