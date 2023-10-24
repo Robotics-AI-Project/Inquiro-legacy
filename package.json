@@ -2,6 +2,7 @@
   "name": "inquiro-monorepo",
   "module": "null",
   "type": "module",
+  "license": "MIT",
   "scripts": {
     "prepare": "husky install"
   },

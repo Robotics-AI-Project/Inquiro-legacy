@@ -1,14 +1,12 @@
 import { backendClient } from "@/lib/axios";
+import { paths } from "@/types/openapi";
 
 const queryKey = "chat";
 const createChatMutationKey = "create-chat";
 const updateChatMutationKey = "update-chat";
 
-export type Chat = {
-  id: string;
-  name: string;
-  createdAt: string;
-};
+export type Chat =
+  paths["/api/chat/{chat_id}"]["get"]["responses"][200]["content"]["application/json"];
 
 const getChatList = async () => {
   const { data } = await backendClient.get<Chat[]>("/api/chat");

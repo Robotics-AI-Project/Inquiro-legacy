@@ -1,14 +1,12 @@
 import { backendClient } from "@/lib/axios";
+import { paths } from "@/types/openapi";
 
 const queryKey = "message";
 
 const createMessageMutationKey = "create-message";
 
-type Message = {
-  id: string;
-  content: string;
-  agent: "USER" | "CHATBOT";
-};
+type Message =
+  paths["/api/chat/{chat_id}/message/"]["post"]["responses"][200]["content"]["application/json"];
 
 const getMessages = async (chatId: string) => {
   const { data } = await backendClient.get<Message[]>(
