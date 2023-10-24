@@ -1,0 +1,22 @@
+meta {
+  name: Create message
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{BACKEND_URL}}/api/chat/{{CHAT_ID}}/message
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
+
+body:json {
+  {
+    "message": "Hola",
+    "agent": "CHATBOT"
+  }
+}

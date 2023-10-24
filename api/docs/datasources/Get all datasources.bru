@@ -1,0 +1,15 @@
+meta {
+  name: Get all datasources
+  type: http
+  seq: 1
+}
+
+get {
+  url: {{BACKEND_URL}}/api/datasource
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}

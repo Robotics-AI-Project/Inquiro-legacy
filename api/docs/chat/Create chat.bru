@@ -1,0 +1,15 @@
+meta {
+  name: Create chat
+  type: http
+  seq: 3
+}
+
+post {
+  url: {{BACKEND_URL}}/api/chat
+  body: none
+  auth: bearer
+}
+
+auth:bearer {
+  token: {{TOKEN}}
+}
