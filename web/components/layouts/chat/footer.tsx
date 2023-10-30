@@ -21,6 +21,7 @@ const Footer = ({ onSubmit }: Props) => {
     }
     setLoading(false);
   };
+
   return (
     <div className="relative z-50 flex flex-col flex-grow-0 flex-shrink-0 h-28 max-h-max justify-end items-center space-y-2 pb-4 bg-gradient-to-t from-white via-white/30">
       <div className="flex h-max space-x-2 items-end w-3/5">
@@ -31,10 +32,10 @@ const Footer = ({ onSubmit }: Props) => {
             maxRows={4}
             placeholder="Send a Message Here"
             value={text}
-            onKeyDown={(e) => {
+            onKeyDown={async (e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
-                console.log("send message");
+                await onClick();
               }
             }}
             onChange={(e) => setText(e.target.value ?? "")}

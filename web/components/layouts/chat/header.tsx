@@ -112,6 +112,12 @@ const Header = ({ chatId }: Props) => {
             onBlur={onBlur}
             contentEditable={!!chatId}
             suppressContentEditableWarning
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                e.preventDefault();
+                e.currentTarget.blur();
+              }
+            }}
           >
             {title}
           </motion.h1>
