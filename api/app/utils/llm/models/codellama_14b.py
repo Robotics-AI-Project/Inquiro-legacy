@@ -2,8 +2,8 @@ import together
 from app.utils.llm import LLMModel
 
 
-class CodeLlama15B(LLMModel):
-    name = "CodeLlama-15b"
+class CodeLlama14B(LLMModel):
+    name = "CodeLlama-14b"
 
     def generate(self, prompt: str, *args, **kwargs) -> str:
         output = together.Complete.create(
