@@ -12,8 +12,9 @@ post {
 
 body:json {
   {
-    "prompt": "How many singers do we have?",
-    "dbUrl": "abc",
-    "model": "a"
+    "prompt": "What's the top rented movie?",
+    "dbUrl": "postgresql://postgres:postgres@localhost:5432/postgres",
+    "model": "GPT-4",
+    "generator": "DIN-SQL"
   }
 }
