@@ -14,7 +14,6 @@
         "**/__pycache__": true
     },
     "python.analysis.autoImportCompletions": true,
-    "python.defaultInterpreterPath": "python",
     "python.analysis.autoFormatStrings": true,
     "python.envFile": "${workspaceFolder}/api/.env",
 }
