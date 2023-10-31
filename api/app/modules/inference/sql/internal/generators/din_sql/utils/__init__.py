@@ -1,2 +1,2 @@
-from .helper import get_database_fields, get_database_foreign_keys
+from .helper import extract_tables_from_schema_links
 from .prompt import classification_few_shot_prompt, schema_linking_few_shot_prompt

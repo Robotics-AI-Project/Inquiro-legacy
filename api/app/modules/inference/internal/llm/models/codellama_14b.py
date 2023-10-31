@@ -1,14 +1,15 @@
 import together
-from app.utils.llm import LLMModel
+
+from ..model import LLMModel
 
 
-class CodeLlama34B(LLMModel):
-    name = "CodeLlama-34b"
+class CodeLlama14B(LLMModel):
+    name = "CodeLlama-14b"
 
     def generate(self, prompt: str, *args, **kwargs) -> str:
         output = together.Complete.create(
             prompt=prompt,
-            model="togethercomputer/CodeLlama-34b",
+            model="togethercomputer/CodeLlama-14b",
             max_tokens=256,
             temperature=0,
             top_k=60,

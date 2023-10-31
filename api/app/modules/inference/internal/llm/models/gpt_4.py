@@ -1,5 +1,6 @@
 import openai
-from app.utils.llm import LLMModel
+
+from ..model import LLMModel
 
 
 class GPT4(LLMModel):
