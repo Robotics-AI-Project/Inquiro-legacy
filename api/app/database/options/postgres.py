@@ -17,7 +17,7 @@ class Postgres(Database):
         inspector = inspect(self.engine)
         return inspector.get_table_names()
 
-    def _tables(self, tables: List[str] | None) -> List[Table]:
+    def tables(self, tables: List[str] | None = None) -> List[Table]:
         inspector = inspect(self.engine)
         if tables is None:
             tables = self._list_tables()
@@ -32,7 +32,9 @@ class Postgres(Database):
             )
         return res
 
-    def _primary_keys(self, tables: List[str] | None, *args, **kwargs) -> List[Column]:
+    def primary_keys(
+        self, tables: List[str] | None = None, *args, **kwargs
+    ) -> List[Column]:
         inspector = inspect(self.engine)
         pks = []
         for table in tables:
@@ -40,7 +42,7 @@ class Postgres(Database):
             pks.append(Column(table=table, name=pk["constrained_columns"][0]))
         return pks
 
-    def _foreign_keys(
+    def foreign_keys(
         self, tables: Optional[List[str]] = None, *args, **kwargs
     ) -> List[ForeignKey]:
         if tables is None:
