@@ -32,7 +32,7 @@ class Database(ABC):
 
     def get_table_infos_prompt(self, tables: Optional[list[str]] = None):
         tables_formatted = ""
-        for table in self._tables(tables):
+        for table in self.tables(tables):
             columns_formatted = map(lambda c: c.name, table.columns)
             table_formatted = (
                 f"Table {table.name}, columns = [*, {','.join(columns_formatted)}]\n"
@@ -41,12 +41,12 @@ class Database(ABC):
         return tables_formatted
 
     def get_primary_keys_prompt(self, tables: Optional[List[str]] = None):
-        pks = self._primary_keys(tables)
+        pks = self.primary_keys(tables)
         pks_formatted = map(lambda x: f"{x.table}.{x.name}", pks)
         return f"Primary_keys = [{', '.join(pks_formatted)}]"
 
     def get_foreign_keys_prompt(self, tables: Optional[List[str]] = None):
-        fks = self._foreign_keys(tables)
+        fks = self.foreign_keys(tables)
         fk_formatted = map(
             lambda x: f"{x.referenced_column.table}.{x.referencing_column.name} = {x.referencing_column.table}.{x.referencing_column.name}",
             fks,
@@ -58,17 +58,17 @@ class Database(ABC):
         pass
 
     @abstractmethod
-    def _tables(self, tables: Optional[List[str]]) -> List[Table]:
+    def tables(self, tables: Optional[List[str]]) -> List[Table]:
         pass
 
     @abstractmethod
-    def _primary_keys(
+    def primary_keys(
         self, tables: Optional[List[str]], *args, **kwargs
     ) -> List[Column]:
         pass
 
     @abstractmethod
-    def _foreign_keys(
+    def foreign_keys(
         self, tables: Optional[List[str]] = None, *args, **kwargs
     ) -> List[ForeignKey]:
         pass
