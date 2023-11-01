@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 import openai
 
 from ..model import LLMModel
@@ -6,10 +8,13 @@ from ..model import LLMModel
 class GPT4(LLMModel):
     name = "GPT-4"
 
-    def generate(self, prompt: str, *args, **kwargs) -> str:
+    def generate(self, prompt: str | List[Dict[str, str]], *args, **kwargs) -> str:
+        message = (
+            [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
+        )
         response = openai.ChatCompletion.create(
             model="gpt-4",
-            messages=[{"role": "user", "content": prompt}],
+            messages=message,
             n=1,
             stream=False,
             temperature=0.0,

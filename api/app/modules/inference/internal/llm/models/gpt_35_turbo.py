@@ -1,3 +1,5 @@
+from typing import Dict, List
+
 import openai
 
 from ..model import LLMModel
@@ -6,17 +8,17 @@ from ..model import LLMModel
 class GPT35Turbo(LLMModel):
     name = "GPT-3.5-turbo"
 
-    def generate(self, prompt: str, *args, **kwargs) -> str:
+    def generate(self, prompt: str | List[Dict[str, str]], *args, **kwargs) -> str:
+        message = (
+            [{"role": "user", "content": prompt}] if isinstance(prompt, str) else prompt
+        )
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo-16k",
-            messages=[{"role": "user", "content": prompt}],
+            model="gpt-3.5-turbo",
+            messages=message,
             n=1,
             stream=False,
-            temperature=0.0,
+            temperature=0.2,
             max_tokens=600,
-            top_p=1.0,
-            frequency_penalty=0.0,
-            presence_penalty=0.0,
             *args,
             **kwargs,
         )
