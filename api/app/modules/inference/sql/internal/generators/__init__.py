@@ -2,9 +2,10 @@ from app.database import Database, databases
 from app.modules.inference.internal.generator.generator import Generator
 from app.modules.inference.internal.llm import LLMModel, models
 from app.modules.inference.internal.llm.model import LLMModel
+from app.modules.inference.sql.internal.generators.c3_sql import C3SQLGenerator
 from app.modules.inference.sql.internal.generators.din_sql import DINSQLGenerator
 
-generators = [DINSQLGenerator]
+generators = [DINSQLGenerator, C3SQLGenerator]
 
 
 class SQLGenerator(Generator):
