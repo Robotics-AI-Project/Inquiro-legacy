@@ -1,1 +1,0 @@
-from app.utils.openapi.generate_schema import generate_openapi_schema
