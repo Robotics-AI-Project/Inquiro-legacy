@@ -1,57 +1,26 @@
-import axios from "axios";
 import { auth } from "./firebase-auth";
-import { ROUTES } from "@/constants/nav";
 import dayjs from "dayjs";
 import { clientEnv } from "./env/client.mjs";
+import { OpenAPI } from "./api";
 
-export const backendClient = axios.create({
-  baseURL: clientEnv.NEXT_PUBLIC_BACKEND_URL,
-  withCredentials: true,
-});
+OpenAPI.BASE = clientEnv.NEXT_PUBLIC_BACKEND_URL;
+OpenAPI.WITH_CREDENTIALS = true;
+OpenAPI.TOKEN = async () => {
+  try {
+    await auth.authStateReady();
 
-backendClient.interceptors.request.use(
-  async (config: any) => {
-    try {
-      await auth.authStateReady();
+    const tokenDecoded = await auth.currentUser?.getIdTokenResult(false);
 
-      const tokenDecoded = await auth.currentUser?.getIdTokenResult(false);
+    const exp = dayjs.unix(Number(tokenDecoded?.claims?.exp));
+    const now = dayjs();
 
-      const exp = dayjs.unix(Number(tokenDecoded?.claims?.exp));
-      const now = dayjs();
-
-      let token = "";
-      if (exp.diff(now, "minute") > 5) {
-        token = (await auth.currentUser?.getIdToken(false)) ?? "";
-      } else {
-        token = (await auth.currentUser?.getIdToken(true)) ?? "";
-      }
-
-      if (token.length > 0) {
-        config.headers["Authorization"] = "Bearer " + token;
-      }
-    } catch (error) {
-      auth.signOut();
+    if (exp.diff(now, "minute") > 5) {
+      return (await auth.currentUser?.getIdToken(false)) ?? "";
     }
-
-    return config;
-  },
-  (error) => {
-    Promise.reject(error);
+    return (await auth.currentUser?.getIdToken(true)) ?? "";
+  } catch (error) {
+    console.error(error);
+    auth.signOut();
+    return "";
   }
-);
-
-backendClient.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  async (error) => {
-    if (
-      error.response.status === 401 &&
-      window.location.pathname !== ROUTES.SIGN_IN
-    ) {
-      await auth.signOut();
-      return (window.location.href = ROUTES.SIGN_IN);
-    }
-    return Promise.reject(error);
-  }
-);
+};
