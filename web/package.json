@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "codegen": "openapi --input http://localhost:8000/openapi.json --output ./lib/api --useOptions --useUnionTypes"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
@@ -21,6 +22,7 @@
     "@radix-ui/react-toast": "^1.1.5",
     "@tanstack/react-query": "^5.0.0",
     "axios": "^1.5.1",
+    "axios-retry": "^3.8.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "date-fns": "^2.30.0",
@@ -45,6 +47,7 @@
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "openapi-typescript-codegen": "^0.25.0",
     "@types/jsonwebtoken": "^9.0.4",
     "@types/node": "latest",
     "@types/react": "latest",
