@@ -9,8 +9,8 @@ router = APIRouter(
 )
 
 
-@router.get("/")
-async def get_messages(chat_id: str) -> list[Message]:
+@router.get("/", operation_id="get_all_messages")
+async def get_all_messages(chat_id: str) -> list[Message]:
     try:
         messages = await prisma.message.find_many(
             where={"chatId": chat_id}, order={"createdAt": "asc"}
@@ -20,7 +20,7 @@ async def get_messages(chat_id: str) -> list[Message]:
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@router.post("/")
+@router.post("/", operation_id="create_message")
 async def create_message(chat_id: str, body: CreateMessageDTO) -> Message:
     try:
         async with prisma.tx() as transaction:

@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Literal
+
+from app.utils.types import Agent
 
 
 @dataclass
@@ -10,4 +11,4 @@ class UpdateChatDTO:
 @dataclass
 class CreateChatDTO:
     message: str
-    agent: Literal["USER"] | Literal["CHATBOT"] = "USER"
+    agent: Agent
