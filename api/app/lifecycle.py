@@ -3,7 +3,6 @@ from typing import Awaitable, Callable
 import firebase_admin
 from app.configs import certificate
 from app.utils import prisma
-from app.utils.openapi import generate_openapi_schema
 from fastapi import FastAPI
 
 
@@ -23,8 +22,6 @@ def register_startup_event(app: FastAPI) -> Callable[[], Awaitable[None]]:
         print("Initialized Firebase.")
         await prisma.connect()
         print("Connected to Prisma.")
-        generate_openapi_schema(app)
-        print("Generated OpenAPI schema.")
 
     return _startup
 
